@@ -9,7 +9,16 @@
 class Solution {
 public:
     bool hasAlternatingBits(uint32_t n) {
-        uint32_t x = n + (n >> 1);
-        return (x & x + 1) == 0;
+        bool ans = false;
+        while(n) {
+            int a = n & 1;
+            n = n >> 1;
+            int b = n & 1;
+
+            if(a == b) {
+                return false;
+            }
+        }
+        return true;
     }
 };
