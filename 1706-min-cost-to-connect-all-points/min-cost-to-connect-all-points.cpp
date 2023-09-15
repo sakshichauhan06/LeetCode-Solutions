@@ -1,39 +1,36 @@
-class disjointset{
-    public:
-    vector<int>par;
-    disjointset(int n){
-        par.resize(n+1);
-        for(int i=0; i<=n; i++){
-            par[i]=i;
-        }
-    }
-    int findp(int u){
-        if(u==par[u]){return u;}
-        return par[u]=findp(par[u]);
-    }
-    void un(int u, int v){
-        if(findp(u)==findp(v)){return;}
-        par[findp(u)]=par[findp(v)];
-    }
-};
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
-        vector<pair<int, pair<int, int>>>v;
-        for(int i=0; i<points.size(); i++){
-            for(int j=i+1; j<points.size(); j++){
-                v.push_back({abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]), {i, j}});
+        int n = points.size();
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> heap; //creating heap to store minimum weight
+        vector<bool> arr(n);
+        heap.push({ 0, 0 });
+        int mincost = 0;
+        int remaning = 0;
+        while (remaning < n) {
+            pair<int, int> topElement = heap.top();
+            heap.pop();
+            
+            int weight = topElement.first;
+            int currNode = topElement.second;
+            if (arr[currNode]) {
+                continue;
+            }
+            
+            arr[currNode] = true;
+            mincost += weight;
+            remaning++;
+            
+            for (int nextNode = 0; nextNode < n; ++nextNode) {
+                if (!arr[nextNode]) {
+                    int nextWeight = abs(points[currNode][0] - points[nextNode][0]) + 
+                                     abs(points[currNode][1] - points[nextNode][1]);
+                    
+                    heap.push({ nextWeight, nextNode });
+                }
             }
         }
-        disjointset d(points.size());
-        sort(v.begin(), v.end());
-        int ans=0;
-        for(auto it: v){
-            if(d.findp(it.second.first)!=d.findp(it.second.second)){
-                ans+=it.first;
-                d.un(it.second.first, it.second.second);
-            }
-        }
-        return ans;
+        
+        return mincost;
     }
 };
