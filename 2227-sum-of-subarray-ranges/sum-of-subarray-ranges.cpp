@@ -6,7 +6,7 @@ public:
         stack<int> s1, s2, s3, s4;
 
         for(int i = 0; i < n; i++) {
-            while(!s1.empty() && nums[s1.top()] < nums[i]) {
+            while(!s1.empty() && nums[s1.top()] > nums[i]) {
                 s1.pop();
             }
             if(s1.empty()) {
@@ -18,7 +18,7 @@ public:
         }
 
         for(int i = n - 1; i >= 0; i--) {
-            while(!s2.empty() && nums[s2.top()] <= nums[i]) {
+            while(!s2.empty() && nums[s2.top()] >= nums[i]) {
                 s2.pop();
             }
             if(s2.empty()) {
@@ -31,7 +31,7 @@ public:
         reverse(nsr.begin(), nsr.end());
 
         for(int i = 0; i < n; i++) {
-            while(!s3.empty() && nums[s3.top()] > nums[i]) {
+            while(!s3.empty() && nums[s3.top()] < nums[i]) {
                 s3.pop();
             }
             if(s3.empty()) {
@@ -43,7 +43,7 @@ public:
         }
 
         for(int i = n - 1; i >= 0; i--) {
-            while(!s4.empty() && nums[s4.top()] >= nums[i]) {
+            while(!s4.empty() && nums[s4.top()] <= nums[i]) {
                 s4.pop();
             }
             if(s4.empty()) {
@@ -64,8 +64,6 @@ public:
             long long gmaxi = (ngr[i] - 1) - i + 1;
             ans += (gmini * gmaxi - smini * smaxi) * nums[i];
         }
-
-        ans = -1 * ans;
 
         return ans;
     }
