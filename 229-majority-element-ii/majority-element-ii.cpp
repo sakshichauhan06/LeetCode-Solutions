@@ -3,7 +3,7 @@ public:
     vector<int> majorityElement(vector<int>& nums) {
         int n = nums.size(); 
         int freq1 = 0, freq2 = 0;
-        int majo1 = INT_MIN, majo2 = INT_MIN;
+        int majo1 = -1, majo2 = -1;
 
         for(int i = 0; i < n; i++) {
             if(majo1 == nums[i]) {
