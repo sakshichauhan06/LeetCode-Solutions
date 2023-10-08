@@ -9,11 +9,11 @@ public:
 
         while(low <= high) {
             int mid = low + (high - low) / 2;
-            if(isBadVersion(mid) == false) {
-                low = mid + 1;
-            } else if(isBadVersion(mid) == true) {
+            if(isBadVersion(mid)) {
                 high = mid - 1;
-            } 
+            } else {
+                low = mid + 1;
+            }
         }
 
         return low;
