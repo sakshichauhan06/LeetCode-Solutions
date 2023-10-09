@@ -5,10 +5,10 @@ public:
             ans.push_back(op);
             return;
         }
-        solve(nums, op, i + 1, ans);
+        solve(nums, op, i + 1, ans); // ith element not included
 
         op.push_back(nums[i]);
-        solve(nums, op, i + 1, ans);
+        solve(nums, op, i + 1, ans);  // ith element included
         op.pop_back();
     }
 
