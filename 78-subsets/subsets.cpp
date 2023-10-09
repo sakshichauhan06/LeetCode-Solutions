@@ -1,18 +1,22 @@
 class Solution {
 public:
-    void solve(vector<int>& nums, int index, vector<int>& current, vector<vector<int>>& ans) {
-        ans.push_back(current);  // Include the current subset in the result
-        for (int i = index; i < nums.size(); ++i) {
-            current.push_back(nums[i]);  // Include nums[i] in the current subset
-            solve(nums, i + 1, current, ans);  // Recur with the next index
-            current.pop_back();  // Backtrack by removing nums[i] from the current subset
+    void solve(vector<int> &nums, vector<int> &op, int i, vector<vector<int>> &ans) {
+        if(i == nums.size()) {
+            ans.push_back(op);
+            return;
         }
+        solve(nums, op, i + 1, ans);
+
+        op.push_back(nums[i]);
+        solve(nums, op, i + 1, ans);
+        op.pop_back();
     }
 
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> ans;
-        vector<int> current;
-        solve(nums, 0, current, ans);
+        vector<int> op;
+        solve(nums, op, 0, ans);
+
         return ans;
     }
 };
