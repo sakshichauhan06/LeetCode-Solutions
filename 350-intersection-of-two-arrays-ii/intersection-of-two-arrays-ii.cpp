@@ -1,22 +1,20 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int, int> frequency;
-        vector<int> result;
+        unordered_map<int, int> mp;
+        vector<int> ans;
 
-        // Count the frequency of elements in nums1
-        for (int num : nums1) {
-            frequency[num]++;
+        for(auto it : nums1) {
+            mp[it]++;
         }
 
-        // Check for common elements in nums2 and decrement frequency
-        for (int num : nums2) {
-            if (frequency.find(num) != frequency.end() && frequency[num] > 0) {
-                result.push_back(num);
-                frequency[num]--;
+        for(auto it : nums2) {
+            if(mp.find(it) != mp.end() && mp[it] > 0) {
+                ans.push_back(it);
+                mp[it]--;
             }
         }
 
-        return result;
+        return ans;
     }
 };
