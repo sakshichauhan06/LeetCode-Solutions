@@ -3,19 +3,19 @@ public:
     int binSearch(vector<int>& arr, int target, int n) {
         int l = 0;
         int h = n - 1;
+        int ans = -1;
 
         while(l <= h) {
             int mid = l + (h - l) / 2;
-            if(arr[mid] == target) {
-                return mid;
-            } else if(arr[mid] > arr[h]) {
-                h--;
-            } else if(arr[mid] < target) {
-                l++;
+            if(arr[mid] > arr[mid + 1]) {
+                ans = mid;
+                h = mid - 1;
+            } else {
+                l = mid + 1;
             }
         }
 
-        return 0;
+        return ans;
     }
 
     int peakIndexInMountainArray(vector<int>& arr) {
