@@ -1,19 +1,19 @@
 class Solution {
 public:
     int maximumGroups(vector<int>& grades) {
+        int low = 0, high = 1000;
         int n = grades.size();
-        int count = 0, i = 0;
-        sort(grades.begin(), grades.end());
 
-        if(n == 2) {
-            return 1;
+        while(low < high) {
+            int mid = (low + high + 1) / 2;
+            int k = mid * (mid + 1) / 2;
+            if(k > n) {
+                high = mid - 1;
+            } else {
+                low = mid;
+            }
         }
 
-        while(i < n) {
-            ++count;
-            i = count + i + 1;
-        }
-
-        return count;
+        return low;
     }
 };
