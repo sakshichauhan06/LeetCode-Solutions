@@ -3,6 +3,7 @@ public:
     int maximumGroups(vector<int>& grades) {
         int low = 0, high = 1000;
         int n = grades.size();
+        sort(grades.begin(), grades.end());
 
         while(low < high) {
             int mid = (low + high + 1) / 2;
