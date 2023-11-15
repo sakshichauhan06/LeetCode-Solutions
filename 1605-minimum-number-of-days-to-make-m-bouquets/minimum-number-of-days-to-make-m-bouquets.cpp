@@ -47,26 +47,16 @@ public:
         long long val = m * 1ll * k * 1ll;
         if(val>n) return -1;
 
-        // int low = INT_MAX, high = INT_MIN;
-        // for(int i = 0; i< n; i++) {
-        //     low = min(bloomDay[i], low);
-        //     high = max(bloomDay[i], high);
-        // }
-
-        // if(m == 1 && k == 1) {
-        //     return bloomDay[0];
-        // }
-
         while(low <= high) {
             int mid = low + (high - low) / 2;
             if(possible(bloomDay, mid, m, k)) {
-                // ans = mid;
+                ans = mid;
                 high = mid - 1;
             } else {
                 low = mid + 1;
             }
         }
 
-        return low;
+        return ans;
     }
 };
