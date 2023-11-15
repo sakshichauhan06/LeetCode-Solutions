@@ -42,16 +42,16 @@ public:
 
     int minDays(vector<int>& bloomDay, int m, int k) {
         int n = bloomDay.size();
-        // int low = *min_element(bloomDay.begin(), bloomDay.end()), high = *max_element(bloomDay.begin(), bloomDay.end());
+        int low = *min_element(bloomDay.begin(), bloomDay.end()), high = *max_element(bloomDay.begin(), bloomDay.end());
         int ans = -1;
         long long val = m * 1ll * k * 1ll;
         if(val>n) return -1;
 
-        int low = INT_MAX, high = INT_MIN;
-        for(int i = 0; i< n; i++) {
-            low = min(bloomDay[i], low);
-            high = max(bloomDay[i], high);
-        }
+        // int low = INT_MAX, high = INT_MIN;
+        // for(int i = 0; i< n; i++) {
+        //     low = min(bloomDay[i], low);
+        //     high = max(bloomDay[i], high);
+        // }
 
         // if(m == 1 && k == 1) {
         //     return bloomDay[0];
