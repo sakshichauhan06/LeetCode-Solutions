@@ -11,7 +11,7 @@ public:
     }
 
     int findKthNumber(int m, int n, int k) {
-        int low = 0;
+        int low = 1;
         int high = m * n;
         int ans = 0;
 
