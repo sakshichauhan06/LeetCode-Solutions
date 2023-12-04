@@ -4,14 +4,10 @@ public:
         if(n == 1) {
             return true;
         }
-
-        if(n <= 0 || n & 1) {
+        if(n % 2 == 1 || n <= 0) {
             return false;
         } 
-    
-        if((n & (n - 1)) != 0) {
-            return false;
-        }
-        return true;
+
+        return isPowerOfTwo(n / 2);
     }
 };
