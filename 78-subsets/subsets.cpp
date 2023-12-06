@@ -1,21 +1,24 @@
 class Solution {
 public:
-    void solve(vector<int> &nums, vector<int> &op, int i, vector<vector<int>> &ans) {
-        if(i == nums.size()) {
+    void genSubsets(vector<int> ip, vector<int> op, vector<vector<int>> &ans) {
+        if(ip.size() == 0) {
             ans.push_back(op);
             return;
         }
-        solve(nums, op, i + 1, ans); // ith element not included
-
-        op.push_back(nums[i]);
-        solve(nums, op, i + 1, ans);  // ith element included
-        op.pop_back();
+        int ele = ip[0];
+        ip.erase(ip.begin() + 0);
+        genSubsets(ip, op, ans);
+        op.push_back(ele);
+        genSubsets(ip, op, ans);
+        return;
     }
 
     vector<vector<int>> subsets(vector<int>& nums) {
+        int n = nums.size();
         vector<vector<int>> ans;
+        vector<int> ip = nums;
         vector<int> op;
-        solve(nums, op, 0, ans);
+        genSubsets(ip, op, ans);
 
         return ans;
     }
