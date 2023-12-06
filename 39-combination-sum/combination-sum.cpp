@@ -1,17 +1,16 @@
 class Solution {
 public:
-    void solve(vector<int> &nums, vector<int> &v, int target, vector<vector<int>> &ans, int i) {
+    void solve(vector<int> &nums, vector<int> &v, int target, vector<vector<int>> &ans, int idx) {
         if(target == 0) {
             ans.push_back(v);
         }
-        if(nums.size() == 0) {
+        if(idx == nums.size()) {
             return;
         }
-
-        while(i < nums.size() && target - nums[i] >= 0) {
-            v.push_back(nums[i]);
-            solve(nums, v, target - nums[i], ans, i);
-            i++;
+        while(idx < nums.size() && target - nums[idx] >= 0) {
+            v.push_back(nums[idx]);
+            solve(nums, v, target - nums[idx], ans, idx);
+            idx++;
             v.pop_back();
         }
     }
@@ -23,8 +22,8 @@ public:
         nums.assign(s.begin(), s.end());
         vector<vector<int>> ans;
         vector<int> v;
-        int i = 0;
-        solve(nums, v, target, ans, i);
+
+        solve(nums, v, target, ans, 0);
 
         return ans;
     }
