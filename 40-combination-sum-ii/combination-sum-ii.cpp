@@ -7,7 +7,7 @@ public:
         }
 
         for(int i = idx; i < candidates.size(); i++) {
-            if(i > idx && candidates[i] == candidates[i - 1]) {
+            if(i > idx && candidates[i] == candidates[i - 1]) { // avoid duplicates
                 continue;
             }
             if(candidates[idx] <= target) {
