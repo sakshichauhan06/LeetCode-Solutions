@@ -11,32 +11,16 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, int sum, int target, vector<int> &v) {
-        if(root != nullptr && root->left == nullptr && root->right == nullptr) {
-            sum += root->val;
-            v.push_back(sum);
-            return;
-        }
-        if(root != nullptr) {
-            sum += root->val;
-            dfs(root->left, sum, target, v);
-            dfs(root->right, sum, target, v);
-        }
-    }
-
     bool hasPathSum(TreeNode* root, int targetSum) {
         if(root == nullptr) {
             return false;
         }
-        vector<int> v;
-        dfs(root, 0, targetSum, v);
+        targetSum -= root->val;
 
-        for(auto it : v) {
-            if(it == targetSum) {
-                return true;
-            }
+        if(targetSum == 0 && root->left == nullptr && root->right == nullptr) {
+            return true;
         }
 
-        return false;
+        return hasPathSum(root->left, targetSum) || hasPathSum(root->right, targetSum);
     }
 };
