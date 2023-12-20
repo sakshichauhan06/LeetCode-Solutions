@@ -23,7 +23,7 @@ public:
         } else if(root != nullptr) {
             return min(getMini(root->left, len + 1), getMini(root->right, len + 1));
         }
-        return (len + 1);
+        return len;
     }
 
     int minDepth(TreeNode* root) {
