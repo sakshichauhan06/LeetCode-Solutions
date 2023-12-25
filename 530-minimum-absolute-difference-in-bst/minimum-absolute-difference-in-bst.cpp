@@ -11,20 +11,19 @@
  */
 class Solution {
 public:
-    void traverse(TreeNode* root, multiset<int> &s) {
+    void traverse(TreeNode* root, vector<int> &v) {
         if(root == nullptr) {
             return;
         }
-        s.insert(root->val);
-        traverse(root->left, s);
-        traverse(root->right, s);
+        traverse(root->left, v);
+        v.push_back(root->val);
+        traverse(root->right, v);
     }
 
     int getMinimumDifference(TreeNode* root) {
-        multiset<int> s;
-        traverse(root, s);
+        vector<int> v;
+        traverse(root, v);
 
-        vector<int> v(s.begin(), s.end());
         int n = v.size();
         int mini = INT_MAX;
 
