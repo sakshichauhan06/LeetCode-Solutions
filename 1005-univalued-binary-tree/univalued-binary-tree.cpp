@@ -11,23 +11,19 @@
  */
 class Solution {
 public:
-    bool flag = true;
-    void dfs(TreeNode* root, int k) {
+    bool checkUni(TreeNode* root, int k) {
         if(root == nullptr) {
-            return;
+            return true;
+        } else if(root->val != k) {
+            return false;
         }
-        if(root->val != k) {
-            flag = false;
-            return;
-        } 
-        dfs(root->left, k);
-        dfs(root->right, k);
+        return checkUni(root->left, k) && checkUni(root->right, k);
     }
 
     bool isUnivalTree(TreeNode* root) {
-        int k = root->val;
-        dfs(root, k);
-
-        return flag;
+        if(root == nullptr) {
+            return true;
+        }
+        return checkUni(root, root->val);
     }
 };
