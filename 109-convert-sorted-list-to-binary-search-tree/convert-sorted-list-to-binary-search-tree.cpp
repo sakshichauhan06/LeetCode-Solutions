@@ -21,32 +21,27 @@
  */
 class Solution {
 public:
-    void getV(ListNode* head, vector<int> &v) {
-        if(head == nullptr) {
-            return;
-        }
-        while(head) {
-            v.push_back(head->val);
-            head = head->next;
-        }
-    }
-
-    TreeNode* getBst(vector<int> &v, int l, int h) {
-        if(l > h) {
+    TreeNode* sortedListToBST(ListNode* head) {
+        if(!head) {
             return nullptr;
         }
-        int mid = l + (h - l) / 2;
-        TreeNode* newNode = new TreeNode(v[mid]);
-        newNode->left = getBst(v, l, mid - 1);
-        newNode->right = getBst(v, mid + 1, h);
+        if(!head->next) {
+            return new TreeNode(head->val);
+        }
+
+        // get mid by slow-fast pointer approach
+        auto slow = head, fast = head->next;
+        while(fast->next && fast->next->next) {
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+
+        auto mid = slow->next;
+        slow->next = nullptr;
+        TreeNode* newNode = new TreeNode(mid->val);
+        newNode->left = sortedListToBST(head);
+        newNode->right = sortedListToBST(mid->next);
 
         return newNode;
-    }
-
-    TreeNode* sortedListToBST(ListNode* head) {
-        vector<int> v;
-        getV(head, v);
-        int l = 0, h = v.size() - 1;
-        return getBst(v, l, h);
     }
 };
